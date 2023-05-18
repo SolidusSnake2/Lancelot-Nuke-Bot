@@ -1,0 +1,4 @@
+discord==2.0.0
+asyncio
+colorama
+pyfiglet
